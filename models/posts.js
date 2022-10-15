@@ -7,10 +7,10 @@ const query = util.promisify(pool.query).bind(pool);
 module.exports = {
   get: async (limit, offset) => {
     try {
-      const data = await query(`SELECT * FROM posts LIMIT ? OFFSET ?`, [
-        parseInt(limit),
-        parseInt(offset),
-      ]);
+      const data = await query(
+        `SELECT id, content, category, title, status FROM posts LIMIT ? OFFSET ? ORDER BY id DESC`,
+        [parseInt(limit), parseInt((offset - 1) * limit)]
+      );
       return data;
     } catch (error) {
       return error;
@@ -28,7 +28,10 @@ module.exports = {
   },
   detail: async (id) => {
     try {
-      const result = await query(`SELECT * FROM posts where id = ?`, [id]);
+      const result = await query(
+        `SELECT id, content, category, title, status FROM posts where id = ?`,
+        [id]
+      );
       return result[0];
     } catch (error) {
       return error;
@@ -56,9 +59,10 @@ module.exports = {
   },
   getByStatus: async (status) => {
     try {
-      const result = await query(`SELECT * FROM posts WHERE status =  ?`, [
-        status,
-      ]);
+      const result = await query(
+        `SELECT id, content, category, title, status FROM posts WHERE status =  ? ORDER BY id DESC`,
+        [status]
+      );
       return result;
     } catch (error) {
       return error;
@@ -67,7 +71,7 @@ module.exports = {
   pagination: async (limit, offset) => {
     try {
       const result = await query(
-        `SELECT * FROM posts WHERE status =  ? LIMIT ? OFFSET ?`,
+        `SELECT id, content, category, title, status FROM posts WHERE status =  ? ORDER BY id DESC LIMIT ? OFFSET ?`,
         ["publish", limit, offset]
       );
       return result;

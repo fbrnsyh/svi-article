@@ -9,9 +9,6 @@ pool.on("error", (err) => {
 });
 
 module.exports = {
-  post: async (req, res) => {
-    res.render("pages/post");
-  },
   getArticle: async (req, res, next) => {
     try {
       const { limit, offset } = req.params;

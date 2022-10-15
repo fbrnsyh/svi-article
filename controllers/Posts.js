@@ -130,6 +130,16 @@ module.exports = {
     const { title, content, category, status, id } = req.body;
     console.log("req ", req.body);
     const errors = validationResult(req);
+    const breadcrumb = [
+      {
+        label: "Post",
+        link: "/",
+      },
+      {
+        label: "All Post",
+        link: "/",
+      },
+    ];
     // console.log("error ", errors);
     if (!errors.isEmpty()) {
       //   res.status(422).json({ errors: errors.array() });
@@ -139,6 +149,7 @@ module.exports = {
         category,
         id,
         errors: errors.array(),
+        breadcrumb,
       });
     } else {
       let data = {
