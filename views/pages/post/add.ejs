@@ -1,0 +1,47 @@
+<%- include('../../layouts/header.ejs') %>
+    <%- include('../../layouts/sidebar.ejs') %>
+        <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+            <%- include('../../layouts/navbar.ejs') %>
+                <div class="body flex-grow-1 px-3">
+                    <div class="container-lg">
+
+                        <% if(typeof errors !='undefined' ) { %>
+                            <% errors.forEach(function(error) { %>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= error.msg %>
+                                        <button type="button" class="btn-close" data-coreui-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                                <% }) %>
+                                    <% } %>
+
+                                        <form action="" method="POST">
+                                            <div class="row">
+                                                <div class="mb-3">
+                                                    <label for="title" class="form-label">Title</label>
+                                                    <input type="title" class="form-control" id="title"
+                                                        placeholder="Input title" name="title" value="<%= title; %>">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="content" class="form-label">Content</label>
+                                                    <textarea class="form-control" id="content" name="content"
+                                                        rows="6"><%= content; %></textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="category" class="form-label">Category</label>
+                                                    <input type="category" class="form-control" id="category"
+                                                        placeholder="Input category" name="category"
+                                                        value="<%= category; %>">
+                                                </div>
+                                                <div class="form-inline">
+                                                    <input id="publish" class="btn btn-success" type="submit"
+                                                        name="status" value="publish">
+                                                    <input id="draft" class="btn btn-secondary" type="submit"
+                                                        name="status" value="draft">
+                                                </div>
+                                            </div>
+                                        </form>
+                    </div>
+                </div>
+                <%- include('../../layouts/footer.ejs') %>
+        </div>

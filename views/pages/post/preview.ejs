@@ -1,0 +1,54 @@
+<%- include('../../layouts/header.ejs') %>
+    <%- include('../../layouts/sidebar.ejs') %>
+        <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+            <%- include('../../layouts/navbar.ejs') %>
+                <div class="body flex-grow-1 px-3">
+                    <div class="container-lg">
+                        <div class="row">
+                            <% publish.forEach((item, key)=> { %>
+                                <div class="card col-4 m-2" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= item.title %>
+                                        </h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            <%= item.category %>
+                                        </h6>
+                                        <p class="card-text">
+                                            <%= item.content %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="display: flex; justify-items: center; align-items: center;">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link <%= page == 1 && `disabled` %>"
+                                                href="/posts/preview?page=<%=parseInt(page)-1%>" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <% for(var i=0; i < totalData; i++) { %>
+                                            <li class="page-item"><a class="page-link <%= i+1 == page && `active` %> "
+                                                    href="/posts/preview?page=<%=i+1%>">
+                                                    <%= i+1 %>
+                                                </a></li>
+                                            <% } %>
+                                                <li class="page-item">
+                                                    <a class="page-link <%= page == totalData && `disabled` %>"
+                                                        href="/posts/preview?page=<%=parseInt(page)+1%>"
+                                                        aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%- include('../../layouts/footer.ejs') %>
+        </div>

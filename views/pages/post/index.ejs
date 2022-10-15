@@ -1,0 +1,208 @@
+<%- include('../../layouts/header.ejs') %>
+    <%- include('../../layouts/sidebar.ejs') %>
+        <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+            <%- include('../../layouts/navbar.ejs') %>
+                <div class="body flex-grow-1 px-3">
+                    <div class="container-lg">
+                        <div class="row">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="published-tab-pane" role="tabpanel"
+                                    aria-labelledby="published-tab" tabindex="0">
+                                    <div class="card mb-4">
+                                        <div class="card-header"><strong>All Posts</strong></div>
+                                        <div class="card-body">
+                                            <div class="example">
+                                                <nav>
+                                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                        <button class="nav-link active" id="published-tab"
+                                                            data-coreui-toggle="tab" data-coreui-target="#published"
+                                                            type="button" role="tab" aria-controls="published"
+                                                            aria-selected="true">Published (<%= publish.length %>
+                                                                )</button>
+                                                        <button class="nav-link" id="draft-tab" data-coreui-toggle="tab"
+                                                            data-coreui-target="#draft" type="button" role="tab"
+                                                            aria-controls="draft" aria-selected="false">Draft (<%=
+                                                                draft.length %>
+                                                                )</button>
+                                                        <button class="nav-link" id="trashed-tab"
+                                                            data-coreui-toggle="tab" data-coreui-target="#trashed"
+                                                            type="button" role="tab" aria-controls="trashed"
+                                                            aria-selected="false">Trashed (<%= trash.length %>
+                                                                )</button>
+                                                    </div>
+                                                </nav>
+
+                                                <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade mt-4 show active" id="published"
+                                                        role="tabpanel" aria-labelledby="published-tab" tabindex="0">
+                                                        <table class="table table-dark table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Title</th>
+                                                                    <th scope="col">Category</th>
+                                                                    <th scope="col">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% publish.forEach((item, key)=> { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= key+1 %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= item.title %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= item.category %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div
+                                                                                style="display: inline-flex; gap: 10px;">
+
+                                                                                <a href="/posts/edit/<%= item.id %>"
+                                                                                    class="btn btn-warning edit">
+                                                                                    <svg class="icon me-2">
+                                                                                        <use
+                                                                                            xlink:href="/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil">
+                                                                                        </use>
+                                                                                    </svg></a>
+                                                                                <form
+                                                                                    action="/posts/trash/<%= item.id %>"
+                                                                                    method="GET">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-danger">
+                                                                                        <svg class="icon me-2">
+                                                                                            <use
+                                                                                                xlink:href="/assets/vendors/@coreui/icons/svg/free.svg#cil-trash">
+                                                                                            </use>
+                                                                                        </svg>
+                                                                                    </button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }) %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane fade mt-4" id="draft" role="tabpanel"
+                                                        aria-labelledby="draft-tab" tabindex="0">
+
+                                                        <table class="table table-dark table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Title</th>
+                                                                    <th scope="col">Category</th>
+                                                                    <th scope="col">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% draft.forEach((item, key)=> { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= key+1 %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= item.title %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= item.category %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div
+                                                                                style="display: inline-flex; gap: 10px;">
+
+                                                                                <a href="/posts/edit/<%= item.id %>"
+                                                                                    class="btn btn-warning edit">
+                                                                                    <svg class="icon me-2">
+                                                                                        <use
+                                                                                            xlink:href="/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil">
+                                                                                        </use>
+                                                                                    </svg></a>
+                                                                                <form
+                                                                                    action="/posts/trash/<%= item.id %>"
+                                                                                    method="GET">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-danger">
+                                                                                        <svg class="icon me-2">
+                                                                                            <use
+                                                                                                xlink:href="/assets/vendors/@coreui/icons/svg/free.svg#cil-trash">
+                                                                                            </use>
+                                                                                        </svg>
+                                                                                    </button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }) %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane fade mt-4" id="trashed" role="tabpanel"
+                                                        aria-labelledby="trashed-tab" tabindex="0">
+                                                        <table class="table table-dark table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Title</th>
+                                                                    <th scope="col">Category</th>
+                                                                    <th scope="col">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% trash.forEach((item, key)=> { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= key+1 %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= item.title %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= item.category %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div
+                                                                                style="display: inline-flex; gap: 10px;">
+
+                                                                                <a href="/posts/edit/<%= item.id %>"
+                                                                                    class="btn btn-warning edit">
+                                                                                    <svg class="icon me-2">
+                                                                                        <use
+                                                                                            xlink:href="/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil">
+                                                                                        </use>
+                                                                                    </svg></a>
+                                                                                <form
+                                                                                    action="/posts/trash/<%= item.id %>"
+                                                                                    method="GET">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-danger">
+                                                                                        <svg class="icon me-2">
+                                                                                            <use
+                                                                                                xlink:href="/assets/vendors/@coreui/icons/svg/free.svg#cil-trash">
+                                                                                            </use>
+                                                                                        </svg>
+                                                                                    </button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }) %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <%- include('../../layouts/footer.ejs') %>
+        </div>
