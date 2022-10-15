@@ -11,10 +11,11 @@ Made for Sharing Vision Indonesia assessment
 ## Installation
 #### FE & BE
 ```sh
-cd project
+git clone git@gitlab.com:09febrian/svi-article.git
+cd svi-article
 npm i
-node app
+npm start
 ```
 #### For database
 - Open phpmyadmin
-- Import database
+- Import database article.sql
