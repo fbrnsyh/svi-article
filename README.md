@@ -15,6 +15,7 @@ git clone git@gitlab.com:09febrian/svi-article.git
 cd svi-article
 npm i
 npm start
+open http://localhost:3000
 ```
 #### For database
 - Open phpmyadmin
